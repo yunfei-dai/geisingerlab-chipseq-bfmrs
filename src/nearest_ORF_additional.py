@@ -5,13 +5,12 @@
 ## The annotation directory contains gb files of each genome (chromosome and plasmids)
 ## The search is limited to 1000 bp downstream or upstream of the peak position
 ## Usage:
-##  python nearest_ORF_additional.py <infile> <outfile> <annotations>
+## python nearest_ORF_additional.py <infile> <outfile> <annotations>
 
 import os
 import pandas as pd
 from sys import argv
 from Bio import SeqIO
-from scipy.stats import norm
 from bisect import bisect_left
 
 def parse_gb(gb):
