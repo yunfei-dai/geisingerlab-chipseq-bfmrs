@@ -2,6 +2,10 @@
 
 ## This script searches for ORFs within 1000 bp of peak position
 ## Input is bed file with averaged peak sumit positions (average_summit.bed)
+## The annotation directory contains gb files of each genome (chromosome and plasmids)
+## The search is limited to 1000 bp downstream or upstream of the peak position
+## Usage:
+##  python nearest_ORF_additional.py <infile> <outfile> <annotations>
 
 import os
 import pandas as pd
@@ -99,7 +103,7 @@ class NearestORF:
                 match_info = self.get_match_info(next_match_index, next_match_strand)
                 match_info[1] = counter # Update Nth nearest ORF
                 next_match_distance = match_info[7]
-                if abs(next_match_distance) <= 1000:
+                if abs(next_match_distance) <= 1000: 
                     last_ORF_pos = all_ORF_match[-1][4] # start position of last ORF match
                     intergenic_distance = abs(match_info[4] - last_ORF_pos) # calculate intergenic distance
                     match_info[8] = intergenic_distance # update intergenic distance
