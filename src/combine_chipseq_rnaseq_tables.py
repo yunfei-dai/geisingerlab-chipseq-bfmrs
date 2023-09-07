@@ -1,10 +1,12 @@
+#! /usr/bin/python3
+
+## This script connects the average peak table with RNAseq tables
+## There are 3 RNAseq tables
+
+## to do : update input 
 import os
 import sys
 import pandas as pd
-
-rnaseq_bfmRS = "/work/geisingerlab/Yunfei/2023_Apr_ChipSeq_Analysis/rnaseq/bfmRS_WT.xlsx"
-rnaseq_bfmR = "/work/geisingerlab/Yunfei/2023_Apr_ChipSeq_Analysis/rnaseq/bfmR_WT.xlsx"
-rnaseq_bfmS = "/work/geisingerlab/Yunfei/2023_Apr_ChipSeq_Analysis/rnaseq/bfmS_WT.xlsx"
 
 def read_rnaseq_table(file):
     df = pd.read_excel(file)
@@ -12,9 +14,9 @@ def read_rnaseq_table(file):
     return df
 
 def main():
-
     infile = sys.argv[1]
     outfile = sys.argv[2]
+    rna_seq_tables = sys.argv[3]
     
     rnaseq_table = {}
     rnaseq_table.update({"BfmRS_WT" : read_rnaseq_table(rnaseq_bfmRS)})
