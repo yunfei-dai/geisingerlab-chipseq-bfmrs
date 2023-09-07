@@ -35,6 +35,7 @@ def parse_gb(gb):
     return dict
 
 def make_orf_list(annotations, chrom):
+    # get a list of ORFs from a given genome
     gb = os.path.join(annotations, chrom + '.gb')
     dict_chrom = parse_gb(gb)
     start_codon_list = sorted(list(dict_chrom.keys()))
@@ -114,6 +115,7 @@ class NearestORF:
         return all_ORF_match
 
     def nearest_orf(self):
+        # slice the ORF list for new search beyond the nearest ORF
         nearest_match_index, nearest_match = self.find_nearest_start_codon()
         nearest_match_info = self.get_match_info(nearest_match, self.dict_annotation[nearest_match][3])
         nearest_match_strand = self.dict_annotation[nearest_match][3]
