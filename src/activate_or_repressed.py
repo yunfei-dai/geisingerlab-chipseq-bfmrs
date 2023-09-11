@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+
+## This script categorizes regulons as activated or repressed based on the RNASeq data and ChipSeq calls
+
 import sys
 import pandas as pd
 import numpy as np
