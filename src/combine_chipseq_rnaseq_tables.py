@@ -25,7 +25,7 @@ def main():
 
     test_table = read_rnaseq_table(rnaseq_bfmRS)
 
-    df_chipseq = pd.read_csv(infile, sep='\t', index_col=0)
+    df_chipseq = pd.read_csv(infile, sep='\t')
     df_chipseq = df_chipseq.set_index("locus_tag")
 
     col_names = ["log2(fold_change)", "significant", "protein_id", "product"]
