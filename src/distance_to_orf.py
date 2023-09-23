@@ -142,7 +142,7 @@ def main():
     
     gene_dict = {}
     start_codon_dict = {}
-    for chrom in ['NZ_CP012004.1.gb',
+    for chrom in ['NZ_CP012004.1',
                   'pAb1',
                   'pAb2',
                   'pAb3']:
