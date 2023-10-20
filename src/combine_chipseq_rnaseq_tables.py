@@ -2,6 +2,7 @@
 
 ## This script connects the average peak table with RNAseq tables
 ## There are 3 RNAseq tables
+## Input chipseq table is .nearest_orf.tsv
 
 ## to do : update input 
 import os
