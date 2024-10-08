@@ -42,12 +42,12 @@ def is_intra(summit, dict, chrom):
     for key, value in dict[chrom].items():
         start = value[1]
         end = value[2]
-        chrom = value[3]
-        if chrom == 1:
+        strand = value[3]
+        if strand == 1:
             if start <= summit <= end: # genes can overlap, thus there might be more than 1 hit
                 match = True # coding
                 break
-        elif chrom == -1:
+        elif strand == -1:
             if end <= summit <= start: # on the negative strand gene positions are [end, start]
                 match = True # coding
                 break
@@ -98,6 +98,7 @@ def make_histogram(infile, outfile, distance_plot, gene_dict, start_codon_dict):
         match_info = nearest_orf(summit, gene_dict, start_codon_dict, chrom)
         distance = match_info[-1]
         fold_enrich = peak['average_enrichment']
+        peak_width = peak['average_width']
         if is_intra(summit, gene_dict, chrom):
             match_info.append('coding')
             distance_list_coding.append(distance)
@@ -105,10 +106,11 @@ def make_histogram(infile, outfile, distance_plot, gene_dict, start_codon_dict):
             match_info.append('intergenic')
             distance_list_intergenic.append(distance)
         match_info.append(fold_enrich)
+        match_info.append(peak_width)
         match_stats.append(match_info)
     
     # write output to csv
-    col_names = ['locus_tag', 'chrom', 'start', 'end', 'strand', 'summit_pos', 'distance_to_match', 'match_type', 'average_fold_enrichment']
+    col_names = ['locus_tag', 'chrom', 'start', 'end', 'strand', 'summit_pos', 'distance_to_match', 'match_type', 'average_fold_enrichment', 'average_peak_width']
     df_out = pd.DataFrame(match_stats, columns=col_names)
     df_out.to_csv(outfile, sep='\t', index=True)
     
@@ -143,9 +145,9 @@ def main():
     gene_dict = {}
     start_codon_dict = {}
     for chrom in ['NZ_CP012004.1',
-                  'pAb1',
-                  'pAb2',
-                  'pAb3']:
+                  'NC_009083.1',
+                  'NC_009084.1',
+                  'NZ_CP012005.1']:
         dict_chrom, start_codon_list = make_orf_list(annotations, chrom)
         gene_dict.update({chrom: dict_chrom})
         start_codon_dict.update({chrom : start_codon_list})

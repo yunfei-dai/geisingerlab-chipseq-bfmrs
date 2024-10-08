@@ -157,7 +157,8 @@ def make_match_table(infile, outfile, gene_dict, start_codon_dict):
     col_names = ['summit_pos', 'Nth nearest ORF', 'locus_tag', 'chrom', 'start', 'end', 'strand', 'distance_to_match', 'intergenic_distance', 'match_type', 'average_fold_enrichment']
     df_out = pd.DataFrame(match_stats, columns=col_names)
     df_out = df_out.sort_values(by = ['summit_pos', 'Nth nearest ORF'], ascending = [True, True])
-    df_out.to_csv(outfile, sep='\t', index=False)
+    df_out = df_out.set_index("locus_tag")
+    df_out.to_csv(outfile, sep='\t')
     
 def main():
     infile = argv[1]
